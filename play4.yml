@@ -1,0 +1,43 @@
+---
+- hosts: all
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  tasks:
+  #copy the repo file from local server to remote managed node.
+   - name: Copy repo file to remote server.
+     copy:
+      src: /home/ansible/Dec2022_Plays/rhel82.repo
+      dest: /etc/yum.repos.d/rhel82.repo
+      mode: 0644
+      owner: root
+      group: root
+ #Install httpd package     
+   - name: Install Apache webserver
+     yum:
+      name: httpd
+      #state: latest
+      state: installed
+#Copy index.html from local server to remote server.
+   - name: Copy the index file
+     copy:
+      src: /home/ansible/Dec2022_Plays/index.html
+      dest: /var/www/html/index.html
+      mode: 0644
+      owner: root
+      group: root
+# Add http service to firewalld and enabled it immediately
+   - name: Add http port to filrewall
+     firewalld:
+      service: http
+      state: enabled
+      permanent: yes
+      immediate: yes
+#Start the httpd service
+   - name: Start httpd web Service
+     service:
+      name: httpd
+      state: started
+      enabled: yes
+... 
+#End of the play

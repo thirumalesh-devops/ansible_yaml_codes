@@ -1,0 +1,13 @@
+---
+- name: play to download a file from remote server to local server
+  hosts: 192.168.34.200
+  remote_user: ansible
+  become: true
+  tasks:
+   - name: fetch /var/log/messages
+     fetch:
+      src: /var/log/messages
+      dest: /tmp/
+      flat: yes
+...
+#authored by Thirumalesh

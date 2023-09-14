@@ -1,0 +1,18 @@
+---
+#Demonstrate fail module
+- name: Play to demonstrate play module
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task to fail based on the condition 
+     fail: 
+      msg: "This is failed"
+     when: false
+   - name: Another Task
+     debug:
+      msg: "Some message"
+...
+
+  
+      

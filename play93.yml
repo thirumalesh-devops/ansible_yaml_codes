@@ -1,0 +1,9 @@
+---
+- name: Server Information Summary
+  hosts: all
+  tasks:
+   - name: Create serverinfo.txt using Jinja2
+     template:
+       src: get_facts.j2
+    #   dest: /tmp/serverinfo.txt
+       dest: /var/www/html/index.html

@@ -1,0 +1,17 @@
+---
+#Playbook to create a user in the group of servers defined in rsarmy host group
+- name: This is my first play
+  hosts: rsarmy
+  remote_user: ansible
+  become: true
+  tasks:
+  - name: Create a user in rsarmy managed hosts
+    user:
+     name: rocky #user name is rocky
+     uid: 7799
+     password: $6$af89pwq88u9r$CQyJKVuv9uQCw04lQhnDYZZIgsfAgNkfRh.RXTCPdYyL/ZMEdEsq4T5MQZsov2.QggrIuRLLoJ.ibWH1PXlNH0
+     comment: "Rockey to Rock"
+     state: present
+     #state: absent
+     #remove: yes
+...

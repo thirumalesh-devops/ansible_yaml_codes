@@ -1,0 +1,38 @@
+---
+- name: Play to read CSV file 
+  hosts: rsarmy
+  become: true
+  remote_user: ansible
+  vars:
+   csv_file: /tmp/Users_2023.csv
+   src_csv_file: ./Users_2023.csv
+  tasks:
+   - name: push csv file to remote server
+     copy: 
+      src: "{{src_csv_file}}"
+      dest: "{{csv_file}}"
+      owner: root
+      group: root
+      mode: '0644'
+   - name: read {{csv_file}} using read_csv module
+     read_csv:
+      path: "{{csv_file}}"
+     register: out
+   - name: create user based on csv file
+     group:
+      name: "{{item.groups}}"
+      state: present
+     loop: "{{out.list}}"
+   - name: create user based on csv file
+     user:
+      name: "{{item.name}}"
+      uid: "{{item.uid}}"
+      groups: "{{item.groups}}"
+      append: yes
+      comment: "{{item.firstname}}_{{item.lastname}}"
+      password: "{{item.password|password_hash('sha512')}}"
+      update_password: on_create
+      state: present
+     loop: "{{out.list}}"
+...
+#End.

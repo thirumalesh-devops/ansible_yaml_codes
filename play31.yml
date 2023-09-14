@@ -1,0 +1,10 @@
+---
+- name: Play to demonstrate debug  var attribute
+  hosts: localhost
+  vars:
+   tname: trainer
+  tasks:
+  - name:
+    debug:
+     var: tname
+...

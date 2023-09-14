@@ -1,0 +1,22 @@
+---
+- name: Play to demonstrate vars_prompt
+  hosts: rsarmy
+  become: true
+  remote_user: ansible
+  vars_prompt:
+   - prompt: Enter Username
+     name: uname
+     private: no
+   - prompt: Enter Password
+     name: pass
+     private: yes
+  tasks:
+   - name: Create he user {{uname}}
+     user:
+      name: "{{uname}}"
+      password: "{{pass|password_hash('sha512')}}"
+      state: present
+...
+      
+    
+     

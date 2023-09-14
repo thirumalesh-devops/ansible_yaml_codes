@@ -1,0 +1,19 @@
+---
+- name: play to work with gathered ansible facts
+  hosts: rsarmy
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Create an empty file 
+     file:
+      path: /etc/{{ansible_hostname}}.cfg
+      state: touch
+      mode: 0666
+      owner: root
+      group: root
+   - name: Task to write host info the file using ansible facts
+     lineinfile:
+      path: /etc/{{ansible_hostname}}.cfg
+      line: "The server name is {{ansible_hostname}}, the ip address is {{ ansible_default_ipv4.address }}, and the Mac address is {{ansible_default_ipv4.macaddress}} and the number of processors count {{ansible_processor_count}}"
+... 
+#End of the play

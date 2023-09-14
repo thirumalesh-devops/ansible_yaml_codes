@@ -1,0 +1,16 @@
+---
+- name: Play demonstrate register variable
+  hosts: 192.168.36.200
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task to start a web server
+     service:
+      name: httpd
+      state: started
+     register: myvar
+     ignore_errors: yes #do not exit the playbook if taks fails
+   - name: print the registered variable value
+     debug:
+      msg: "{{myvar.changed}}"
+...

@@ -1,0 +1,15 @@
+---
+- name: Play to archive the directory and compress the same
+  hosts: localhost
+  remote_user: ansible
+  become: true
+  tasks:
+   - name: Task to archive the given directory
+     archive:
+      path:
+       - /etc/*
+       - /var/*
+      dest: myarchive.tar.gz
+      format: gz
+...
+#End

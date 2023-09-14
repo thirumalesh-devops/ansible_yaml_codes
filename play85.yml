@@ -1,0 +1,24 @@
+---
+- name: Play to demonstrate ansible tags
+  hosts: localhost
+  gather_facts: false
+  tasks:
+   - name: Task1 to print text
+     debug:
+      msg: "Task1 - Red planet"
+     tags: mars
+   - name: Task2 to print text
+     debug:
+      msg: "Task2 - Venus planet"
+     tags: mist
+   - name: Task3 to print text
+     debug:
+      msg: "Task3 - Jupiter planet"
+     tags: mosaic 
+   - name: Task4 to print text
+     debug:
+      msg: "Task4 - Earth planet"
+     tags: 
+      - blue
+      - green
+...

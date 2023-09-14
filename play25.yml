@@ -1,0 +1,17 @@
+---
+- name: Demonstrate vars_prompt
+  hosts: localhost
+  become: true
+  gather_facts: false
+  remote_user: ansible
+  vars_prompt:
+   - name: uname
+     prompt: "Enter the Your BoyFriend"
+     default: "MyHero" #Default value assigned to variable name if not provided explicitly
+     private: yes
+  tasks:
+   - name: Printed the prompted values
+     debug:
+      msg: The value is "{{uname}}"
+...
+#End

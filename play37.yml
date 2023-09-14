@@ -1,0 +1,35 @@
+---
+ - name: Play to configure httpd website
+   hosts: reds
+   become: true
+   remote_user: ansible
+   tasks:
+    - name: Install http web server
+      yum:
+       name:
+        - httpd
+        - firewalld
+       state: latest
+    - name: Task to start webserver service - httpd
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Task to start firewall service - firewalld
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+    - name: Task to add port to firewall
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: yes
+    - name: Task to add line in /var/www/html/index.html, create the file if it doesnt exits
+      lineinfile:
+        line: <html> <b1>This is {{ansible_hostname}} server and my ip address is {{ansible_default_ipv4.address}} </b1> </html>
+        dest: /var/www/html/index.html
+        create: yes
+...
+#End of the play

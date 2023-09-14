@@ -1,0 +1,34 @@
+---
+- name: play to implement handler
+  hosts: reds
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  vars:
+   pkg: httpd
+   service: httpd
+   p_ort: 80/tcp
+  tasks:
+  - name: Task to install httpd package
+    yum: 
+     name: "{{pkg}}"
+     state: latest
+    notify: web_start
+  - name: Add "{{p_ort}}"
+    firewalld:
+     port: "{{p_ort}}"
+     permanent: yes
+     immediate: yes
+     state: enabled
+  handlers:
+  - name: web_start
+    service:
+     name: "{{service}}"
+     state: started
+...
+#End
+  
+  
+     
+     
+   

@@ -1,0 +1,17 @@
+---
+- name: Play to run scripts 
+  hosts: rsarmy
+  become: true
+  remote_user: ansible
+  vars:
+      script_name: /home/ansible/Dec2022_Plays/get_vgs.sh
+  tasks:
+   - name: Execute the script
+     script: "{{script_name}}"
+   - name: Pull the generated output #output stored in /tmp/get_vgs.out
+     fetch:
+      src: /tmp/get_vgs.out
+      dest: "/tmp/get_vgs.out_{{ansible_hostname}}"
+      flat: yes #do not copy the directory structure;only the file name.
+...
+#End of the play

@@ -1,0 +1,11 @@
+---
+- name: check out ansible facts
+  hosts: 192.168.36.200
+  become: true
+  remote_user: ansible
+  tasks:
+   - name:
+     debug:
+      msg: "{{ansible_local['sirisha']['srisha_friends']['friend1']}}"
+      
+...

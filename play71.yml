@@ -1,0 +1,40 @@
+---
+- name: Play to demonstrate synchronize module; synchronize is a wrapper for rsync
+  hosts: rsarmy
+  remote_user: ansible
+  become: true
+  vars:
+   source_Dir: /backup
+   dest_Dir: /dbackup
+  tasks:
+   - name: check if rsynch package in local
+     yum: 
+      name: rsync
+      state: latest
+     delegate_to: localhost
+   - name: Install rsynch in remote server if it doesnt exists
+     yum: 
+      name: rsync
+      state: latest
+   - name: Check if /dbackup exists in the destination server
+     stat:
+      path: /dbackup
+     register: out
+   - name: Create /dbackup if it doesnt exists
+     file:
+      path: /dbackup
+      state: directory
+      mode: '0755'
+      owner: root
+      group: root
+     when: out.stat.exists == false
+   - name: Play to Synchronize /backup source from local server /dbackup in destination host
+     synchronize:
+      src: "{{source_Dir}}"
+      dest: "{{dest_Dir}}"
+      compress: yes
+      archive: yes
+      recursive: yes
+...
+#End
+       

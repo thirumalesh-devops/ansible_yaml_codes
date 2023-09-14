@@ -1,0 +1,33 @@
+---
+- name: Play to demonstrate 'isdefine' 'notdefine' fail module nd == operator
+#Play to check if variable is defined and also use of when condition
+  hosts: localhost
+  remote_user: ansible
+  become: true
+  gather_facts: false
+  tasks:
+   - name: Check if variable is defined.
+     shell:
+      echo "Variable my_color is defined and its value is {{my_color}}"
+     when:  my_color is defined #returns true if my_color is defined
+   - name: user fail module to demonstrate when variable is not defined
+     fail:
+      msg: "This play requires variable 'book' to be defined"
+     when: book is not defined
+     ignore_errors: true #move on if the above error takes place
+   - name: Check if /rose directory is empty
+     command:
+      ls /rose
+     register: out
+   - name: Print the message if /rose directory is empty
+     debug:
+      msg: "The directory /rose is empty"
+     when: out.stdout == ""
+   - name: Print /rose content if it is not empty
+     debug:
+      var: out.stdout_lines
+     when: out.stdout != ""
+     
+     
+...
+#End of the play

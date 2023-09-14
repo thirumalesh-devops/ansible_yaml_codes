@@ -1,0 +1,13 @@
+---
+- name: Demonstrate replace module in ansible
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Using replace module to replace the text
+     replace:
+      path: /home/ansible/hostnames.txt
+      regexp: varun
+      replace: HandsomeVarun
+      backup: yes
+...

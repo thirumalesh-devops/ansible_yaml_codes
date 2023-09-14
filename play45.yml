@@ -1,0 +1,12 @@
+---
+- name: Play to demonstrate unarchive
+  hosts: 192.168.10.200
+  gather_facts: false
+  become: true
+  tasks:
+   - name: Task to unarchive  
+     unarchive:
+      src: /tmp/etc_archive.tar.gz
+      dest: /var/tmp
+      remote_src: yes
+...

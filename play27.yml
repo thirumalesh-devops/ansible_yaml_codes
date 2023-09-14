@@ -1,0 +1,22 @@
+---
+- name: Eyes on screen
+  hosts: localhost
+  remote_user: ansible
+  become: true
+  vars:
+   user1:
+    name: bhavya
+    gecos: From Kolar
+    shell: /bin/bash
+    home: /home/bhavya
+   user2:
+    name: vlavanya
+    gecos: From Srinivasapuram
+    shell: /bin/bash
+    home: /home/vlavanya
+  tasks:
+   - name: Task to demonstrate variable
+     debug:
+   #   msg: "User1 Dtails: name={{user1.name}} gecos={{user1.gecos}} shell={{user1.shell}} home={{user1.home}} User2 Dtails: name={{user2.name}} gecos={{user2.gecos}} shell={{user2.shell}} home={{user2.home}}"
+      msg: "User1 Dtails: name={{user1['name']}} gecos={{user1['gecos']}} shell={{user1['shell']}} home={{user1['home']}} "
+...

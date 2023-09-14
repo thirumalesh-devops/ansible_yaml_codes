@@ -1,0 +1,17 @@
+---
+- name: Demonstrate quotes while printing the variable using debug module
+  hosts: localhost
+  become: true
+  vars:
+   os: Linux
+  tasks:
+  - name: Print the value of variable
+    debug:
+     msg: "{{os}}"
+  - name: Print the value of os
+    debug:
+     msg: Hi there {{os}}
+  - name: print the value of os
+    debug:
+     msg: "{{os}} operating system"
+... #End of the play

@@ -1,0 +1,22 @@
+---
+- name: work with find module to find files
+  hosts: localhost
+  remote_user: ansible
+  become: true
+  gather_facts: false
+  tasks:
+   - name: Task to find given file
+     find:
+      paths: /etc
+      file_type: file
+      pattern: 
+       - pass*
+       - httpd.conf
+       - sysctl.conf
+      recurse: yes
+     register: out 
+   - name: Print
+     debug:
+      msg: "{{item.path}}"
+     loop: "{{out.files}}"
+... 

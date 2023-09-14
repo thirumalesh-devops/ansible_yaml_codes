@@ -1,0 +1,18 @@
+---
+#Create a soft link
+- name: play to create a soft link
+  hosts: [192.168.36.200, 192.168.35.200, 192.168.55.200, 192.168.18.200, 192.168.46.200, 192.168.34.200]
+  become: true
+  remote_user: ansible
+  tasks:
+  - name: create a soft link
+    file:
+     src: /home/ansible/chiri.txt
+     dest: /home/ansible/link_divya.txt #soft link file to create.
+     state: link
+     mode: 0644
+     owner: ansible
+     group: ansible
+     force: yes
+...
+#authored by Divya Machina

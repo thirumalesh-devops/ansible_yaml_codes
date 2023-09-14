@@ -1,0 +1,16 @@
+---
+- name: Demonstrate vars_files method of using variables in the play book
+  hosts: rsarmy
+  become: true
+  remote_user: ansible
+  vars_files: 
+   - vars/prod_users.yml
+  tasks:
+   - name: Task to create oracle user
+     user:
+      name: "{{u1_name}}"
+      password: "{{u1_password}}"
+      comment: "{{u1_gecos}}"
+      shell: "{{u1_shell}}"
+      home: "{{u1_home}}"
+...

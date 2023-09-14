@@ -1,0 +1,28 @@
+---
+- name: Demonstrate error handling in ansible using block...resucue.. always
+#In playbooks, blocks are clauses that enclose tasks. 
+#Blocks allow for logical grouping of tasks
+#and can be used to control how tasks are executed.
+#blocks in playbooks can be used with three keywords:
+# block: Defines the main tasks to run.
+# rescue: Defines the tasks that will be run if the tasks defined in the block clause fails.
+# always: Defines the tasks that will always run independently of 
+# the success or failure of tasks defined in the block and rescue clauses.
+  hosts: localhost
+  become: true
+  tasks:
+   - block:
+     - name: Task to install a package
+       yum:
+        name: mariadb1
+        state: installed
+     rescue:
+       - name: Print rescue message
+         debug:
+          msg: I am in rescue
+     always:
+       - name: print always block message
+         debug:
+          msg: I am in always
+
+... #End of the play

@@ -1,0 +1,15 @@
+---
+- name: Play to demonstrate archive
+  hosts: 192.168.10.200
+  become: true
+  gather_facts: false
+  tasks:
+   - name: Task to archive remote server /etc 
+     archive:
+      path: /etc
+      dest: /tmp/etc_archive.tar.gz
+      format: gz
+      owner: ansible
+      group: ansible
+      mode: 0600
+...

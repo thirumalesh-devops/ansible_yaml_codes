@@ -1,0 +1,11 @@
+--- 
+- name: set hostname 
+  hosts: 192.168.35.200
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  tasks:
+  - name: Set hostname
+    hostname:
+     name: nuthna_desktop.alclabs.in
+...

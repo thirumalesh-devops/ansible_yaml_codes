@@ -1,0 +1,16 @@
+---
+- name: Play to print the variable name ; its call host inventory variable
+        #defined in the inventory :(
+  hosts: 
+   - 192.168.10.200 
+   - 192.168.11.200
+   - 192.168.15.200
+   - 192.168.35.200
+   - 192.168.28.200
+   - 192.168.56.200
+  tasks:
+   - name: Print the variable
+     debug:
+      msg: "The value of name is: {{name}}"
+...
+#end

@@ -1,0 +1,16 @@
+---
+- name: play to demonstrate variables 
+  hosts: localhost
+  vars:
+   user: 
+    trainer:
+     first_name: captain
+     last_name: america
+    student:
+     first_name: brilliant
+     last_name: chap
+  tasks: 
+  - name:
+    debug: 
+     msg: "{{user.trainer.first_name}}"
+     #msg: "{{user['trainer']['first_name']}}"

@@ -1,0 +1,26 @@
+---
+- name: Demonstrate vars in the task
+  hosts: localhost
+  gather_facts: false
+  become: true
+  vars:
+   dname: /Nomad
+  remote_user: ansible
+  tasks:
+   - name: Create a directory
+     vars: 
+       dname: /ImpDir
+     file:
+      path: "{{dname}}"
+      state: directory
+      owner: root
+      group: ansible
+      mode: '0755'
+   - name: Create a another directory
+     file:
+      path: "{{dname}}"
+      state: directory
+      owner: root
+      group: ansible
+      mode: '0755'
+...

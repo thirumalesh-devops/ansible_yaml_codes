@@ -1,0 +1,15 @@
+---
+- name: Implement Raw module.
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  tasks:
+   - name: take to work with raw module. Used when there is no python availabe in mgd node.
+     raw:
+      /usr/bin/vmstat
+     register: out
+   - name: print the output
+     debug: 
+      msg: "{{out.stdout_lines}}"
+...

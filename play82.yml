@@ -1,0 +1,27 @@
+---
+- name: Example to demonstrate handlers in ansible
+  hosts: localhost
+  gather_facts: false
+  become: true
+  tasks:
+   - name: task1 to print a debug message
+     debug:
+      msg: "This is my first message"
+     changed_when: true
+     notify: myhandler
+#Handler is processed with notify statement when change occurs in the task.
+#If No change occurs handler will be ingored ie handler will not be notified.
+   - name: task2 to print a debug message
+     debug:
+      msg: "This is my second message"
+     changed_when: true #this makes the task chaged=true, so that handler can be notified.
+     notify: myhandler
+#This is second time you are notify'ing the the same handler.
+#However, though you notifiy handler many time, it runs only once.
+#Hanlders are invoked at the end of all tasks processed. 
+#They are processed in the same order that appear in handlers section and not in the order they are notified.
+  handlers:
+   - name: myhandler
+     debug:
+      msg: "I am in handler"
+...

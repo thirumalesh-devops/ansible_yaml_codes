@@ -1,0 +1,13 @@
+---
+- name: Demonstrate with_sequence conditional statement
+  hosts: localhost
+  gather_facts: false
+  remote_user: anisble
+  become: true
+  tasks:
+   - name: Create multiple files
+     file:
+      path: "/tmp/log_file{{item}}.log"
+      state: touch
+     with_sequence: start=1 stride=3 count=10
+...

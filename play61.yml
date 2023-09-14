@@ -1,0 +1,13 @@
+---
+- name: List all the hosts in the inventory
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  tasks:
+  - name: Print hosts in the inventory by looping against all the items in groups[all]
+    debug:
+     msg: "{{item}}"
+    loop: "{{groups['all']}}" #Remember the magic variable
+...
+   

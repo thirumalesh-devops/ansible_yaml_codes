@@ -1,0 +1,10 @@
+[rhel82_BaseOS]
+name=RHEL 8.2 Base OS 
+baseurl=ftp://192.168.2.45/BaseOS
+enabled=1
+gpgcheck=0
+[rhel82_AppSteam]
+name=RHEL 8.2 AppStream
+baseurl=ftp://192.168.2.45/AppStream
+enable=1
+gpgcheck=0

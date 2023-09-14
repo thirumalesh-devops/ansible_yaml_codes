@@ -1,0 +1,16 @@
+---
+- name: Demonstrate uri module
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  tasks:
+  - name: Task to demonstrate uri module
+    uri:
+     url: http://192.168.35.200/index.html1
+     return_content: yes
+    register: out
+  - name: Print the register variable
+    debug:
+     var: out
+... 

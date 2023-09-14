@@ -1,0 +1,27 @@
+---
+- name: Playbook to retrieve system information 
+  hosts: rsarmy
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Delete the info File if it exists, so that a new file can be created
+     file:
+      path: "/tmp/sysinfo_{{ansible_hostname}}"
+      state: absent
+   - name: Task to extrant system information
+     lineinfile:
+      path: "/tmp/sysinfo_{{ansible_hostname}}"
+      line: "Name:{{ansible_hostname}}\nMemory:{{ansible_memtotal_mb}}\nCPU:{{ansible_processor_count}}"
+      create: yes
+   - name: Task to retrieve mount information
+     lineinfile:
+      path: "/tmp/sysinfo_{{ansible_hostname}}"
+      line: "{{item.mount}}"
+     loop: "{{ansible_mounts}}"
+   - name: Download the info file to local server /sysInfo
+     fetch:
+      src: "/tmp/sysinfo_{{ansible_hostname}}"
+      dest: "/sysInfo/sysinfo_{{ansible_hostname}}"
+      flat: yes
+...      
+      

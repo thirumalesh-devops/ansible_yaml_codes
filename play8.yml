@@ -1,0 +1,22 @@
+--- 
+- name: Play to create a directory and put an empty in the same
+  hosts: rsarmy
+  become: true
+  remote_user: ansible
+  tasks:
+  - name: create a directory
+    file:
+     path: /sample
+     state: directory
+     owner: root
+     group: root
+     mode: '0755'
+  - name: create an empty file
+    file:
+     path: /sample/efile01
+     #state: touch
+     state: absent
+     owner: root
+     group: ansible
+     mode: '0644'
+#End of the play

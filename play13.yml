@@ -1,0 +1,12 @@
+---
+- name: Play to modify /etc/hosts file
+  hosts: 192.168.24.200
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task to  edit hosts file
+     lineinfile:
+      path: /etc/hosts
+      line: "192.168.1.25   vcenter.alclabs.in \n192.168.1.20  gateway.alclabs.in \n" 
+      #appends the line at the end of the file. This is default behaviour
+...

@@ -1,0 +1,17 @@
+---
+- name: Check if Dir exists
+  hosts: localhost
+  gather_facts: false
+  become: true
+  remote_user: ansible
+  tasks:
+   - name:
+     stat:
+      path: /xyz1
+     register: out
+   - name:
+     file:
+      path: /xyz1
+      state: directory
+     when: out.stat.isdir is not defined
+...

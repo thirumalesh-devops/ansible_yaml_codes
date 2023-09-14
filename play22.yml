@@ -1,0 +1,14 @@
+---
+- name: Demonstrating play variable
+  hosts: 192.168.56.200
+  become: true
+  remote_user: ansible
+  vars:          #use vars keywork to define variables within the play
+   pkg: samba     #pkg is variablename and its value is samba; also called dictionary variables
+  tasks:
+  - name: print the variable with debug module
+    debug:
+     msg: "The variable pkg value is: {{pkg}}" #print the variable contents placing them in {{}}
+...
+#End of the play
+  

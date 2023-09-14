@@ -1,0 +1,19 @@
+---
+- name: Play to impliment pause module
+  hosts: localhost
+  gather_facts: false
+  remote_user: ansible
+  become: true
+  vars:
+   wait_seconds: 10
+  tasks:
+  - name: Print the message before {{wait_seconds}} wait seconds
+    debug:
+     msg: Hi I am here before you {{wait_seconds}} seconds
+  - name: Task to chekc the pause module
+    pause:
+     seconds: "{{wait_seconds}}"
+  - name: Print the message after {{wait_seconds}} seconds
+    debug:
+     msg: Hi I am here after {{wait_seconds}} seconds
+...

@@ -1,0 +1,16 @@
+---
+- name: Demonstrate stat module
+  hosts: localhost
+  gather_facts: false
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: check the file statistics using stat module
+     stat:
+      path: /etc/passwd
+     register: out_var
+   - name: print the restister variable out_var
+     debug:
+      var: out_var
+...
+#End

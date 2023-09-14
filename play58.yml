@@ -1,0 +1,33 @@
+---
+# ansible conditional operators
+# == Equal
+# < Less Than
+# > Greater than
+# <= Less than or equal to
+# >= Greater than or equal to
+# != Not equal to
+# Variable Exists ---> is not defined
+#    Ex: "{{myval}} is defined"
+# Variable Does not exists --> is not defined"
+#   Example: "{{myval}} is not  defined"
+# 'and','not','or' operators are logical operators
+# 'in' operators
+#   Example: "{{users}} in [bob,larry,curly]"
+- name: Demonstrate stat mondule
+  hosts: localhost
+  become: true
+  tasks:
+   - name:  Use stat module to test if the file exists
+     stat:
+      path: /etc/passwd1
+     register: out
+   - name: print stat results
+     debug:
+      msg: File exists
+     when: out.stat.exists
+   - name: print stat results
+     debug:
+      msg: File does not exists
+     when: out.stat.exists == false
+...
+#End of the play

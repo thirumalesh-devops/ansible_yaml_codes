@@ -1,0 +1,16 @@
+---
+- name: Wrok with systemd module; something similary to service module
+  hosts: 192.168.35.200
+  gather_facts: false
+  remote_user: ansible
+  become: true
+  tasks:
+   - name: Use systemd module to start/restart/reload/mask/stop system units
+     systemd:
+      name: httpd.service
+      state: stopped
+   - name: Reload cron service
+     systemd:
+      name: crond.service
+      state: reloaded
+...

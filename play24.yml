@@ -1,0 +1,16 @@
+---
+- name: play to demonstrate vars_files
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  vars_files:
+   - vars/my_web_db.yml
+  tasks:
+   - name: Task to demonstrate include_vars module.
+   #include_vars overrides vars_files
+    include_vars: vars/myincludevars.yml
+   - name: My first task
+     debug: 
+      msg: "The variable vlaues web: {{my_web}} and databasae {{my_db}}"
+...
+#end of the play

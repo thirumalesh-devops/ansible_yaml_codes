@@ -1,0 +1,14 @@
+---
+- name: play to download /var/log/messages to local server using fetch module
+  hosts: rsarmy
+  remote_user: ansible
+  become: true
+  vars:
+   fname: /var/log/messages
+  tasks:
+   - name: copy remote {{fname}} file to local /tmp directory
+     fetch:
+      src: "{{fname}}"
+      dest: "/tmp/messages_{{ansible_hostname}}"
+      flat: yes
+...

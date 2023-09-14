@@ -1,0 +1,24 @@
+---
+- name: Play to set expiry date for user
+  hosts: 192.168.28.200
+  #apply taks on the above hosts
+  become: true
+  remote_user: ansible
+  tasks:
+  - name: expire user
+    user:
+     name: puppy
+     expires: 1684157400 #set expiry to 15th May 2023. provide the data in epoch days
+     state: present
+  - name: create a group called husky
+    group:
+     name: husky
+     state: present
+  - name: create a user with secondary group husky
+    user:
+     name: puppy
+     groups: husky 
+     #append: yes # if you want to add secondary group without replacing exising ones  
+... 
+#End of my play
+#Authored by Manashvini.

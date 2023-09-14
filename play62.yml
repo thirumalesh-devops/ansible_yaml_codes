@@ -1,0 +1,48 @@
+---
+#Create user charlie with secondary group devops for all the servers that belongs to rainbow group
+#Create user benny with secondary group atom for all the severs that belongs to butterfly
+#Create user sierra with secondary group leftshift for all the servers belongs to nature group
+- name: Play to create users based on the group
+  hosts: [butterfly, rainbow, nature]
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Create group for group rainbow
+     group:
+      name: devops
+      state: present
+     when: ansible_hostname in groups['rainbow']
+   - name: Create group for group butterfly
+     group:
+      name: atom
+      state: present
+     when: ansible_hostname in groups['butterfly']
+   - name: Create group for group nature
+     group:
+      name: leftshift
+      state: present
+     when: ansible_hostname in groups['nature']
+   - name: Create users for rainbow
+     user:
+      name: charlie
+      groups: devops
+      password: charlie|password_hash('sha512')
+      state: present
+     when: ansible_hostname in groups['rainbow']
+   - name: Create users for butterfly
+     user:
+      name: benny
+      groups: atom
+      password: benny|password_hash('sha512')
+      state: present
+     when: ansible_hostname in groups['butterfly']
+   - name: Create users for nature
+     user:
+      name: sierra
+      groups: leftshift
+      password: sierra|password_hash('sha512')
+      state: present
+     when: ansible_hostname in groups['nature']    
+...
+#End
+    

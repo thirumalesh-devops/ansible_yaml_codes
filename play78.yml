@@ -1,0 +1,12 @@
+---
+#Playbook to create a user in the group of servers defined in rsarmy host group
+- name: This is my first play
+  hosts: rsarmy
+  remote_user: ansible
+  gather_facts: false
+  become: true
+  tasks:
+  - name: Create a user in rsarmy managed hosts
+    ping:
+    ignore_unreachable: yes
+...

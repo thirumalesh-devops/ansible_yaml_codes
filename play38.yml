@@ -1,0 +1,17 @@
+---
+- name: play to copy a file from one directory to another on remote server
+  hosts: reds
+  become: true
+  gather_facts: false
+  vars:
+   fname: /etc/shadow
+  remote_user: ansible
+  tasks:
+  - name: copy {{fname}} to /tmp to all remove servers
+    copy: #copy module to copy a file from local server to remote server
+      src: "{{fname}}"
+      dest: /tmp/usr_list.csv
+      remote_src: yes
+      backup: yes
+...      
+#End of the play

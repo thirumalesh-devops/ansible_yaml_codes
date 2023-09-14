@@ -1,0 +1,9 @@
+---
+- name: Play to print ansible facts
+  hosts: localhost
+  tasks:
+   - name: print ansible fact variables
+     debug:
+      #msg: The Ipv4 setting are {{ansible_facts['kernel']}}
+      msg: The Ipv4 setting are {{ansible_facts['default_ipv4']['address']}} and server name is {{ansible_facts['hostname']}}
+...  

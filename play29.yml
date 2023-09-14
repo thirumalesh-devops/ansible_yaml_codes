@@ -1,0 +1,22 @@
+---
+- name: Create a group
+  hosts: rsarmy
+  become: yes
+  remote_user: ansible
+  vars:
+   grpname: dbgroup
+   usrname: dbadm01
+   usr_pass: Clea4L@ke
+  tasks:
+   - name: Create a group {{grpnae}} which will be used as secondary groups for another user
+     group:
+      name: "{{grpname}}"
+      state: present
+   - name: create user {{usrname}} with secondary group dbgroup
+     user:
+      name: "{{usrname}}"
+      password: "{{ usr_pass | password_hash('sha512')}}" 
+      update_password: on_create
+      groups: dbgroup
+      state: present
+...

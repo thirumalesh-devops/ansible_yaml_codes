@@ -1,0 +1,12 @@
+---
+- name: Play book to download file from the given URL using get_url module
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  tasks:
+   - name: download the kernel from repo url
+     get_url:
+      url: http://192.168.2.45:91/BaseOS/Packages/kernel-4.18.0-240.el8.x86_64.rpm
+      dest: /var/tmp
+...

@@ -1,0 +1,11 @@
+---
+- name: Play to reboot a managed node
+  hosts: [rsarmy]
+  gather_facts: false
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task reboot managed nodes
+     reboot:
+...
+#End
